@@ -541,26 +541,26 @@
     </div>
 
     <!-- Cydni Chatbot Integration -->
-    <!-- Replace this comment with your Cydni chatbot JavaScript snippet -->
-    <!-- 
-    Example integrations for Cydni:
-    
-    Intercom (with Cydni branding):
-    <script>
-      (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/your-app-id';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
+    <script type='text/javascript'>
+      function initEmbeddedMessaging() {
+        try {
+          embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+          embeddedservice_bootstrap.init(
+            '00DEa00000N9TGr',
+            'Cydni_For_Agent_Channel',
+            'https://cydcor--stg.sandbox.my.site.com/ESWCydniForAgentChanne1760385063421',
+            {
+              scrt2URL: 'https://cydcor--stg.sandbox.my.salesforce-scrt.com'
+            }
+          );
+        } catch (err) {
+          console.error('Error loading Embedded Messaging: ', err);
+        }
+      };
     </script>
-    
-    Crisp (with Cydni configuration):
-    <script type="text/javascript">
-      window.$crisp=[];window.CRISP_WEBSITE_ID="your-website-id";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
-    </script>
-    
-    Custom Cydni Integration:
-    <script>
-      // Your Cydni chatbot implementation here
-      // Configure with Cydni's API and branding
-    </script>
-    -->
+    <script type='text/javascript' src='https://cydcor--stg.sandbox.my.site.com/ESWCydniForAgentChanne1760385063421/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
 
     <script>
       (function () {
