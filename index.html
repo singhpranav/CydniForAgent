@@ -430,6 +430,15 @@
       <header class="hero">
         <h1>How can Cydni help you today?</h1>
         <p>Chat with Cydni, our intelligent AI assistant, browse our knowledge base, or connect with our support team for personalized help.</p>
+        
+        <div style="margin-top: 24px;">
+          <button id="chatWithCydni" class="btn primary" type="button" style="font-size: 16px; padding: 14px 24px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="margin-right: 8px;">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Chat with Cydni
+          </button>
+        </div>
       </header>
 
       <section class="grid" aria-label="Support content">
@@ -520,20 +529,11 @@
               </div>
             </div>
           </div>
-
-          <div style="margin-top: 20px;">
-            <a class="btn primary" href="mailto:servicedesk@cydcor.com">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Send Email
-            </a>
-          </div>
         </aside>
       </section>
 
       <footer class="footer" aria-label="Footer">
-        <span>© <span id="year"></span> Cydcor. Powered by Cydni AI.</span>
+        <span>© <span id="year"></span> Powered by Cydni AI.</span>
         <div class="status">
           Cydni is online and ready to help
         </div>
@@ -655,6 +655,33 @@
               });
             }
           });
+        });
+
+        // Chat with Cydni button functionality
+        const chatWithCydniBtn = document.getElementById('chatWithCydni');
+        
+        // Stub function for launching chat - to be implemented later
+        function launchCydni() {
+          console.log('Launching Cydni chat...');
+          embeddedservice_bootstrap.utilAPI.launchChat()
+          .then(() => {
+            console.log(
+              'Inside Cydni chat'
+            );
+          }).catch(() => {
+            console.log(
+              'Inside Cydni chat catch Block'
+            );
+          }).finally(() => {
+            console.log(
+              'Inside Cydni chat finally Block'
+            );
+          });
+        }
+
+        // Add click event listener to the Chat with Cydni button
+        chatWithCydniBtn.addEventListener('click', () => {
+          launchCydni();
         });
       })();
     </script>
