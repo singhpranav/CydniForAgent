@@ -252,6 +252,20 @@
         transition: background 120ms ease;
       }
       .contact-item:hover { background: rgba(255,255,255,0.04); }
+      
+      /* Clickable contact item styling */
+      .contact-item.clickable {
+        cursor: pointer;
+        transition: all 120ms ease;
+      }
+      .contact-item.clickable:hover {
+        background: rgba(124, 58, 237, 0.1);
+        border-color: rgba(124, 58, 237, 0.3);
+        transform: translateX(4px);
+      }
+      .contact-item.clickable:active {
+        transform: translateX(2px) scale(0.98);
+      }
 
       /* Footer */
       .footer {
@@ -497,6 +511,17 @@
         <aside class="card" id="contact">
           <h2>Get in Touch</h2>
           <p>Our support team and Cydni are here to help you succeed.</p>
+          <div class="contact-methods">
+            <div class="contact-item clickable" id="cydnichat">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 9h8M8 13h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div>
+                <strong>Cydni</strong>
+                <div>Chat with your AI assistant</div>
+              </div>
+            </div>
           
           <div class="contact-methods">
             <div class="contact-item">
@@ -659,6 +684,7 @@
 
         // Chat with Cydni button functionality
         const chatWithCydniBtn = document.getElementById('chatWithCydni');
+        const cydniContactItem = document.getElementById('cydnichat');
         
         // Stub function for launching chat - to be implemented later
         function launchCydni() {
@@ -683,6 +709,17 @@
         chatWithCydniBtn.addEventListener('click', () => {
           launchCydni();
         });
+
+        // Add click event listener to the Cydni contact item
+        if (cydniContactItem) {
+          cydniContactItem.addEventListener('click', (e) => {
+            console.log('Cydni contact item clicked!');
+            e.preventDefault();
+            launchCydni();
+          });
+        } else {
+          console.error('Cydni contact item not found!');
+        }
       })();
     </script>
   </body>
