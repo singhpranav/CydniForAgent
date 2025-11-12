@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Cydni Support — Open Market</title>
-    <meta name="description" content="Get help with Open Market. Chat with Cydni, our AI assistant, browse FAQs, and contact support." />
+    <title>Cydni Support</title>
+    <meta name="description" content="Chat with Cydni, our AI assistant, browse our knowledge base, or connect with our support team for personalized help." />
     <link rel="icon" href="./Cydcor Cydni Logo.svg" />
 
     <style>
@@ -24,21 +24,19 @@
         --radius: 16px;
       }
 
-      @media (prefers-color-scheme: light) {
-        :root {
-          --bg: #fafbfc;
-          --panel: #ffffff;
-          --text: #1a202c;
-          --muted: #4a5568;
-          --brand: #7c3aed;
-          --brand-600: #6d28d9;
-          --accent: #0891b2;
-          --success: #059669;
-          --danger: #dc2626;
-          --input: #f7fafc;
-          --border: #e2e8f0;
-          --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
+      :root[data-theme="light"] {
+        --bg: #fafbfc;
+        --panel: #ffffff;
+        --text: #1a202c;
+        --muted: #4a5568;
+        --brand: #7c3aed;
+        --brand-600: #6d28d9;
+        --accent: #0891b2;
+        --success: #059669;
+        --danger: #dc2626;
+        --input: #f7fafc;
+        --border: #e2e8f0;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       }
 
       /* Page layout */
@@ -157,6 +155,15 @@
         text-align: center;
         position: relative;
       }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("./Cydcor Cydni Logo.svg") center/220px 220px no-repeat;
+        opacity: 0.06;
+        filter: blur(0.3px);
+        pointer-events: none;
+      }
       .hero::before {
         content: '';
         position: absolute;
@@ -214,25 +221,57 @@
       .acc-button {
         width: 100%;
         text-align: left;
-        padding: 16px 0;
+        padding: 18px 0;
         background: transparent;
         border: 0;
         color: var(--text);
-        font-size: 15px;
+        font-size: 16px;
+        font-weight: 600;
         display: flex;
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
-        transition: color 120ms ease;
+        transition: color 120ms ease, transform 120ms ease;
       }
       .acc-button:hover { color: var(--brand); }
       .acc-panel { 
-        display: none; 
-        padding: 0 0 16px 0; 
+        display: none;
+        padding: 10px 0 18px 0; 
         color: var(--muted); 
         line-height: 1.6;
       }
-      .acc-item[aria-expanded="true"] .acc-panel { display: block; }
+      .acc-button[aria-expanded="true"] + .acc-panel { display: block; }
+      .acc-button:focus-visible {
+        outline: none;
+        color: var(--brand);
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+      .acc-item + .acc-item {
+        scroll-margin-top: 80px;
+      }
+      .acc-caret {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        margin-left: 12px;
+        color: var(--muted);
+        transition: transform 180ms ease, color 120ms ease;
+      }
+      .acc-button:hover .acc-caret { color: var(--brand); }
+      .acc-button[aria-expanded="true"] .acc-caret { transform: rotate(180deg); color: var(--brand); }
+      /* Panel content lists spacing */
+      .acc-panel ul, 
+      .acc-panel ol {
+        margin: 8px 0 0;
+        padding-left: 20px;
+      }
+      .acc-panel li + li {
+        margin-top: 6px;
+      }
 
       /* Contact section */
       .contact-methods {
@@ -266,17 +305,65 @@
       .contact-item.clickable:active {
         transform: translateX(2px) scale(0.98);
       }
+      .contact-item-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .contact-item .title {
+        display: block;
+        font-weight: 600;
+      }
+      .contact-item .subtitle {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .status.badge {
+        padding: 2px 8px;
+        font-size: 11px;
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.4);
+        color: var(--success);
+      }
+      .status.badge::before {
+        background: var(--success);
+      }
+      .business-hours {
+        margin: 8px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        row-gap: 6px;
+        column-gap: 12px;
+      }
+      .business-hours li {
+        display: contents;
+      }
+      .business-hours .day {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .business-hours .time {
+        justify-self: end;
+        font-size: 13px;
+        font-variant-numeric: tabular-nums;
+      }
 
       /* Footer */
       .footer {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 12px;
+        justify-content: center;
+        gap: 8px;
         margin: 40px 0 20px;
         color: var(--muted);
         font-size: 13px;
+        text-align: center;
       }
+
+      /* Footer */
 
       /* Status indicator */
       .status {
@@ -297,6 +384,26 @@
         height: 6px;
         border-radius: 50%;
         background: var(--success);
+      }
+
+      /* Logo section divider */
+      .section-divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 28px 0;
+      }
+      .section-divider::before,
+      .section-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .section-divider img {
+        width: 18px;
+        height: 18px;
+        opacity: 0.7;
       }
 
       /* Responsive Design */
@@ -328,6 +435,7 @@
         .card { padding: 18px; }
         .contact-methods { gap: 10px; }
         .contact-item { padding: 10px; }
+        .acc-button { font-size: 15px; padding: 16px 0; }
       }
 
       /* Large phones and small tablets (480px and down) */
@@ -347,6 +455,8 @@
         .contact-item svg { 
           width: 24px; 
           height: 24px; 
+        display: block;
+        overflow: visible;
         }
         .btn { 
           padding: 8px 12px; 
@@ -413,6 +523,25 @@
           padding: 16px; 
         }
       }
+
+      /* Very subtle branded background texture */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.03;
+        background:
+          radial-gradient(1200px 800px at 80% -10%, rgba(124,58,237,0.10), transparent 50%),
+          radial-gradient(800px 600px at -10% 10%, rgba(6,182,212,0.08), transparent 50%);
+        -webkit-mask-image: url("./Cydcor Cydni Logo.svg");
+        mask-image: url("./Cydcor Cydni Logo.svg");
+        -webkit-mask-size: 140px 140px;
+        mask-size: 140px 140px;
+        -webkit-mask-repeat: repeat;
+        mask-repeat: repeat;
+      }
     </style>
   </head>
   <body>
@@ -443,7 +572,7 @@
 
       <header class="hero">
         <h1>How can Cydni help you today?</h1>
-        <p>Chat with Cydni, our intelligent AI assistant, browse our knowledge base, or connect with our support team for personalized help.</p>
+        <p>Chat with Cydni, our AI assistant, browse our knowledge base, or connect with our support team for personalized help.</p>
         
         <div style="margin-top: 24px;">
           <button id="chatWithCydni" class="btn primary" type="button" style="font-size: 16px; padding: 14px 24px;">
@@ -460,51 +589,103 @@
           <h2>Frequently Asked Questions</h2>
           <p>Quick answers to the most common questions about Service Desk Support. Cydni can also help with these topics in real-time.</p>
           <div class="accordion" id="faq">
-            <div class="acc-item" aria-expanded="false">
-              <button class="acc-button" aria-controls="faq-1">
+            <!-- FAQ Item - 1 -->
+            <div class="acc-item">
+              <button class="acc-button" id="faq-1-trigger" aria-controls="faq-1" aria-expanded="false">
                 I just finished my training but still don't see the Maps or can't get into SaraPlus?
-                <span aria-hidden="true">▾</span>
+                <span class="acc-caret" aria-hidden="true">▾</span>
               </button>
-              <div id="faq-1" class="acc-panel">
-                That's great that you have finished your training! Just use Cydni and ask to "Refresh your compliance" for immediate access or Please allow up to an hour for your access to be fully activated. If you still don't see Maps or can't access SaraPlus after this period, please contact our support team for further assistance.
+              <div id="faq-1" class="acc-panel" role="region" aria-labelledby="faq-1-trigger">
+                Want to know if you’re ready to sell? Ask Cydni to refresh compliance!
               </div>
             </div>
-            <div class="acc-item" aria-expanded="false">
-              <button class="acc-button" aria-controls="faq-2">
-                How can I reset SaraPlus password?
-                <span aria-hidden="true">▾</span>
+            <!-- FAQ Item - 2 -->
+            <div class="acc-item">
+              <button class="acc-button" id="faq-2-trigger" aria-controls="faq-2" aria-expanded="false">
+                SaraPlus Login Help
+                <span class="acc-caret" aria-hidden="true">▾</span>
               </button>
-              <div id="faq-2" class="acc-panel">
-                Visit Account → Security → Reset Password. A secure link will be sent to your registered email address. The link expires in 24 hours for security.
+              <div id="faq-2" class="acc-panel" role="region" aria-labelledby="faq-2-trigger">
+                If you need any help logging in, click <b>“I need help logging in”</b> on the SaraPlus login page. If your account is locked, ask Cydni to <b>“Unlock SaraPlus”</b>.
               </div>
             </div>
-            <div class="acc-item" aria-expanded="false">
-              <button class="acc-button" aria-controls="faq-3">
-                Where can I get access to MRV?
-                <span aria-hidden="true">▾</span>
+            <!-- FAQ Item - 3 -->
+            <div class="acc-item">
+              <button class="acc-button" id="faq-3-trigger" aria-controls="faq-3" aria-expanded="false">
+                Things You Can Ask Cydni to Do
+                <span class="acc-caret" aria-hidden="true">▾</span>
               </button>
-              <div id="faq-3" class="acc-panel">
-                Visit Account → Security → Reset Password. A secure link will be sent to your registered email address. The link expires in 24 hours for security.
+              <div id="faq-3" class="acc-panel" role="region" aria-labelledby="faq-3-trigger">
+                <ul>
+                  <li>Compliance
+                    <ul>
+                      <li>Refresh Compliance</li>
+                      <li>Resend Compliance Documents</li>
+                    </ul>
+                  </li>
+                  <li>Salesforce
+                    <ul>
+                      <li>Unlock Salesforce (includes resetting Salesforce password)</li>
+                    </ul>
+                  </li>
+                  <li>Volt
+                    <ul>
+                      <li>Resend Volt Invitation</li>
+                      <li>Unlock Volt User</li>
+                      <li>Reset Volt Password</li>
+                    </ul>
+                  </li>
+                  <li>SaraPlus
+                    <ul>
+                      <li>Resend SaraPlus Welcome Email</li>
+                      <li>Reset SaraPlus Password</li>
+                      <li>Unlock SaraPlus</li>
+                    </ul>
+                  </li>
+                  <li>MRV
+                    <ul>
+                      <li>Resend MRV Welcome Email</li>
+                      <li>Reset MRV Password</li>
+                    </ul>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div class="acc-item" aria-expanded="false">
-              <button class="acc-button" aria-controls="faq-4">
-                How do I reset my Salesforce password?
-                <span aria-hidden="true">▾</span>
+            <!-- FAQ Item - 4 -->
+            <div class="acc-item">
+              <button class="acc-button" id="faq-4-trigger" aria-controls="faq-4" aria-expanded="false">
+                How to Update an App on your device
+                <span class="acc-caret" aria-hidden="true">▾</span>
               </button>
-              <div id="faq-4" class="acc-panel">
-                Visit Account → Security → Reset Password. A secure link will be sent to your registered email address. The link expires in 24 hours for security.
+              <div id="faq-4" class="acc-panel" role="region" aria-labelledby="faq-4-trigger">
+                <ol>
+                  <li>Find the app on your home screen and press & hold the icon.</li>
+                  <li>Tap 'Remove App' to uninstall it.</li>
+                  <li>Open the Catalog app:
+                    <ul>
+                      <li>Locate the app you just removed and tap 'Install'.</li>
+                      <li>Allow 5–10 minutes for the app to reinstall and update.</li>
+                    </ul>
+                  </li>
+                  <li>Restart the device once the installation is complete.</li>
+                  <li>Tips for a Smooth App Update:
+                    <ul>
+                      <li>Connect to Wi-Fi for the fastest update.</li>
+                      <li>If Wi-Fi isn’t available, make sure cellular data is enabled.</li>
+                      <li>If the app hasn’t updated after 15 minutes, restart the device.</li>
+                    </ul>
+                  </li>
+                  <li>Automatic updates are enabled on all devices. For best results:
+                    <ul>
+                      <li>Plug into power and connect to Wi-Fi overnight.</li>
+                    </ul>
+                  </li>
+                  <li>Open the HUB app to ensure the device is synced.</li>
+                  <li>Perform updates after fieldwork is complete to avoid disruptions.</li>
+                </ol>
               </div>
             </div>
-            <div class="acc-item" aria-expanded="false">
-              <button class="acc-button" aria-controls="faq-5">
-                How do I contact Service Desk?
-                <span aria-hidden="true">▾</span>
-              </button>
-              <div id="faq-5" class="acc-panel">
-                You can reach us via email, live chat (available 24/7), or phone during business hours. Response times are typically under 2 hours for urgent issues.
-              </div>
-            </div>
+             <!-- FAQ Item - 5 -->
           </div>
         </div>
 
@@ -518,12 +699,16 @@
                 <path d="M8 9h8M8 13h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <div>
-                <strong>Cydni</strong>
-                <div>Chat with your AI assistant</div>
+                <div class="contact-item-header">
+                  <span style="display:inline-flex;align-items:center;gap:8px;">
+                    <img src="./Cydcor Cydni Logo.svg" alt="" width="18" height="18" style="border-radius:50%; background: rgba(255,255,255,0.06); padding:3px;">
+                    <span class="title">Cydni</span>
+                  </span>
+                  <span class="status badge">Cydni is online and ready to help</span>
+                </div>
+                <div class="subtitle">Chat with your AI assistant</div>
               </div>
             </div>
-          
-          <div class="contact-methods">
             <div class="contact-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -545,12 +730,17 @@
             </div>
             
             <div class="contact-item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0018 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="2" />
+                <path d="M12 7.5v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <div>
-                <strong>Business Hours</strong>
-                <div>Mon–Fri: 6AM – 5:30PM PST | Sat: 7AM – 4PM | Sun: 7AM – 12PM PST</div>
+                <span class="title">Business Hours</span>
+                <ul class="business-hours">
+                  <li><span class="day">Mon–Fri</span><span class="time">6AM – 5:30PM PST</span></li>
+                  <li><span class="day">Sat</span><span class="time">7AM – 4PM PST</span></li>
+                  <li><span class="day">Sun</span><span class="time">7AM – 12PM PST</span></li>
+                </ul>
               </div>
             </div>
           </div>
@@ -558,10 +748,8 @@
       </section>
 
       <footer class="footer" aria-label="Footer">
+        <img src="./Cydcor Cydni Logo.svg" alt="" width="16" height="16" style="opacity:.7">
         <span>© <span id="year"></span> Powered by Cydni AI.</span>
-        <div class="status">
-          Cydni is online and ready to help
-        </div>
       </footer>
     </div>
 
@@ -593,8 +781,10 @@
         const themeToggle = $("#themeToggle");
         const THEME_KEY = "supportTheme";
 
-        // Footer year
-        $("#year").textContent = new Date().getFullYear();
+        const yearEl = $("#year");
+        if (yearEl) {
+          yearEl.textContent = new Date().getFullYear();
+        }
 
         // Logo loading debug
         const logoImg = document.querySelector('.logo .mark img');
@@ -662,23 +852,42 @@
         // Accordion behavior
         document.querySelectorAll(".acc-item").forEach((item) => {
           const btn = item.querySelector(".acc-button");
+          const panel = item.querySelector(".acc-panel");
+          if (!btn || !panel) {
+            return;
+          }
+
+          panel.setAttribute("hidden", "");
+
           btn.addEventListener("click", () => {
-            const expanded = item.getAttribute("aria-expanded") === "true";
-            item.setAttribute("aria-expanded", String(!expanded));
+            const expanded = btn.getAttribute("aria-expanded") === "true";
+            const newState = !expanded;
+            btn.setAttribute("aria-expanded", String(newState));
+            if (newState) {
+              panel.removeAttribute("hidden");
+            } else {
+              panel.setAttribute("hidden", "");
+            }
           });
         });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
           anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-              target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-              });
+            const href = this.getAttribute('href');
+            if (!href || href === '#') {
+              return;
             }
+            const target = document.querySelector(href);
+            if (!target) {
+              return;
+            }
+
+            e.preventDefault();
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
           });
         });
 
@@ -686,7 +895,6 @@
         const chatWithCydniBtn = document.getElementById('chatWithCydni');
         const cydniContactItem = document.getElementById('cydnichat');
         
-        // Stub function for launching chat - to be implemented later
         function launchCydni() {
           console.log('Launching Cydni chat...');
           embeddedservice_bootstrap.utilAPI.launchChat()
